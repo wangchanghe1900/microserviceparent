@@ -1,0 +1,4 @@
+# Project exclude paths
+/microservice-common-module/target/
+/microservice-eureka-8001/target/
+/microservice-user-9001/target/

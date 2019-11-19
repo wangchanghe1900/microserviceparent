@@ -1,0 +1,68 @@
+server:
+  port: 9001
+spring:
+  datasource:
+    name: dataSource1
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/apms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: ghzx7519
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid属性
+    initialSize: 5
+    minIdle: 5
+    maxActive: 30
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+  redis:
+    host: 132.78.181.36
+    password: ghzx7519
+    database: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: 10000ms
+  cache:
+    redis:
+      key-prefix: true
+      time-to-live: 3m
+  application:
+    name: microservice-provide-user
+
+logging:
+  level:
+    cn.unicom.microservice.mapper: trace
+management:
+  endpoint:
+    health:
+      show-details: always
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ghzx1234@127.0.0.1:8001/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: cn.unicom.microservice.bean
+
+info:
+  app.name: ${spring.application.name}
+  company.name: www.chinaunicom.cn
+  build.artifactId: ${project.artifactId}
+  build.version:  ${project.version}
