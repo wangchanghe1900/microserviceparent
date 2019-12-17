@@ -1,0 +1,16 @@
+server:
+  port: 10010
+  servlet:
+    context-path: /web
+spring:
+  application:
+    name: microservice-consumer-user
+  freemarker:
+    suffix: .html
+    request-context-attribute: request
+    content-type: text/html
+    cache: false
+    charset: UTF-8
+microservice:
+  user:
+    url: http://microservice-gateway/api/user/

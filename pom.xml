@@ -19,7 +19,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <springcloud-version>Finchley.RELEASE</springcloud-version>
-        <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <lombok.version>1.18.4</lombok.version>
         <springboot-version>2.0.3.RELEASE</springboot-version>
@@ -37,9 +36,15 @@
         <config-version>2.0.2.RELEASE</config-version>
         <cache-version>2.0.5.RELEASE</cache-version>
         <commons-version>2.6.0</commons-version>
-        <feign-version>2.0.3.RELEASE</feign-version>
-        <hytrix-version>2.0.3.RELEASE</hytrix-version>
-        <mybatisplus-version>3.1.2</mybatisplus-version>
+        <feign-version>2.0.0.RELEASE</feign-version>
+        <hytrix-version>2.0.0.RELEASE</hytrix-version>
+        <mybatisplus-version>3.2.0</mybatisplus-version>
+        <oauth-version>2.3.5.RELEASE</oauth-version>
+        <securityjwt-version>1.0.10.RELEASE</securityjwt-version>
+        <securityrsa-version>1.0.8.RELEASE</securityrsa-version>
+        <pio-version>4.0.1</pio-version>
+        <kaptcha.version>0.0.9</kaptcha.version>
+        <shiro-version>1.4.2</shiro-version>
     </properties>
 
     <dependencyManagement>
@@ -162,16 +167,90 @@
                 <version>1.2.17</version>
             </dependency>
             <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>0.10.7</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>0.10.7</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>0.10.7</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${oauth-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${securityjwt-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-rsa</artifactId>
+                <version>${securityrsa-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${pio-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${pio-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${pio-version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
-                <artifactId>commons-pool2</artifactId>
-                <version>${commons-version}</version>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.8.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.axet</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
     <modules>
         <module>microservice-eureka-8001</module>
         <module>microservice-user-9001</module>
-        <module>microservice-common-module</module>
+        <module>microservice-oauthservice-8787</module>
+        <module>microservice-zuul-8990</module>
+        <module>microservice-web3-10010</module>
     </modules>
     <build>
         <finalName>springcloudparent</finalName>

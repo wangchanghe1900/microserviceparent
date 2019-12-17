@@ -6,17 +6,45 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="microserviceuser9001" />
-        <module name="microservicecommonmodule" />
         <module name="microserviceeureka8001" />
+        <module name="microservice-web3-10010" />
+        <module name="microservice-zuul-8990" />
+        <module name="microservice-oauthservice-8787" />
+        <module name="microservicezuul8990" />
+        <module name="microservice-eureka-8001" />
+        <module name="microservicecommonmodule" />
+        <module name="microserviceuser9001" />
+        <module name="microservice-user-9001" />
+        <module name="microserviceoauthservice8787" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="microservice-common-module" target="1.8" />
+      <module name="microservice-web-8089" target="1.8" />
+      <module name="microservice-web-9090" target="1.8" />
+      <module name="microservice-web2-9003" target="1.8" />
+      <module name="microserviceweb7001" target="1.8" />
+      <module name="microserviceweb8089" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="microservice-common-module" options="-parameters" />
+      <module name="microservice-eureka-8001" options="-parameters" />
+      <module name="microservice-oauthservice-8787" options="-parameters" />
+      <module name="microservice-user-9001" options="-parameters" />
+      <module name="microservice-web-8089" options="-parameters" />
+      <module name="microservice-web-9090" options="-parameters" />
+      <module name="microservice-web2-9003" options="-parameters" />
+      <module name="microservice-web3-10010" options="-parameters" />
+      <module name="microservice-zuul-8990" options="-parameters" />
       <module name="microservicecommonmodule" options="-parameters" />
       <module name="microserviceeureka8001" options="-parameters" />
+      <module name="microserviceoauthservice8787" options="-parameters" />
       <module name="microserviceuser9001" options="-parameters" />
+      <module name="microserviceweb7001" options="-parameters" />
+      <module name="microserviceweb8089" options="-parameters" />
+      <module name="microservicezuul8990" options="-parameters" />
     </option>
   </component>
 </project>

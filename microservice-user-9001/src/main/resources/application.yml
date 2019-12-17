@@ -4,9 +4,9 @@ spring:
   datasource:
     name: dataSource1
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/apms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/itemdb?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
     username: root
-    password: ghzx7519
+    password: ghzx@7519
     type: com.alibaba.druid.pool.DruidDataSource
     #druid属性
     initialSize: 5
@@ -29,13 +29,15 @@ spring:
         max-active: 8
         max-idle: 8
         min-idle: 0
-        max-wait: 10000ms
+        max-wait: 1000ms
   cache:
     redis:
       key-prefix: true
       time-to-live: 3m
   application:
     name: microservice-provide-user
+  profiles:
+    active: default
 
 logging:
   level:
@@ -51,18 +53,17 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${server.port}
     prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 4
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true
-  global-config:
-    db-config:
-      id-type: auto
   mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: cn.unicom.microservice.bean
 
 info:
-  app.name: ${spring.application.name}
+  app.name: microservice-provide-user
   company.name: www.chinaunicom.cn
-  build.artifactId: ${project.artifactId}
-  build.version:  ${project.version}
+  version: v1
+

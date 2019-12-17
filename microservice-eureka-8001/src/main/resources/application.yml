@@ -2,15 +2,15 @@ server:
   port: 8001
 eureka:
   server:
-    eviction-interval-timer-in-ms: 30000
+    eviction-interval-timer-in-ms: 3000
   instance:
     hostname: 127.0.0.1
     prefer-ip-address: true
   client:
     fetch-registry: false
     register-with-eureka: false
-    #service-url:
-      #defaultZone: http://root:ghzx1234@eureka8762.com:8762/eureka/
+    service-url:
+      defaultZone: http://root:ghzx1234@127.0.0.1:8001/eureka/
   environment: product
   datacenter: cloud
 spring:

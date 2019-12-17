@@ -1,0 +1,45 @@
+server:
+  port: 8990
+spring:
+  application:
+    name: microservice-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:ghzx1234@127.0.0.1:8001/eureka/
+      #defaultZone: http://root:ghzx1234@eureka8761.com:8761/eureka/,http://root:ghzx1234@eureka8762.com:8762/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+
+zuul:
+  ignored-services: '*'
+  routes:
+    user-route:
+      serviceId: microservice-provide-user
+      path: /user/**
+    comsume-route:
+      serviceId: microservice-consumer-user
+      path: /comsume/**
+  prefix: /api
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" 
+  endpoint:
+      health:
+        show-details: ALWAYS
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+info:
+   app.name: microservice-gateway
+   company.name: www.chinaunicom.cn
