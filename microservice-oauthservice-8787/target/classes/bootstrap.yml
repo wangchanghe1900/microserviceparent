@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: microservice-authentication
+  profiles:
+    active:
+      default
+

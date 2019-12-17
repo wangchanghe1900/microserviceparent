@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: microservice-oauthservice-8787
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: Administrator
+Implementation-Vendor-Id: cn.unicom.oauthservice
+Build-Jdk: 1.8.0_211
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/microserviceparent/microservice-oauthservice-8787
+Created-By: Maven Integration for Eclipse
+

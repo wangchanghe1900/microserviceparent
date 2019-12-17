@@ -1,0 +1,19 @@
+server:
+  port: 8787
+  servlet:
+    context-path: /auth
+jwt:
+  expire-time-in-second: 3600
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://root:ghzx1234@127.0.0.1:8001/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+management:
+  endpoint:
+    health:
+      show-details: always
