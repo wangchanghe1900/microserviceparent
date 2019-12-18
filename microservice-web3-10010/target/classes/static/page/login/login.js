@@ -19,6 +19,8 @@ layui.use(['form','layer','jquery'],function(){
                 data:userInfo,
                 success:function(res){
                     if(res.code==200){
+                        window.sessionStorage.setItem("username",data.field.userName);
+                        //console.log(res.data("id"));
                         window.location.href =curWwwPath+"index";
                     }else{
                         layer.msg(res.msg);

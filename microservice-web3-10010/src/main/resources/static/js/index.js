@@ -9,6 +9,12 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 		element = layui.element;
 		$ = layui.$;
     	layer = parent.layer === undefined ? layui.layer : top.layer;
+	     let url=window.document.location.href;
+	     let username=window.sessionStorage.getItem("username");
+	     if(username==undefined){
+	     	window.location.href=url.substring(0,url.lastIndexOf("/"));
+		 }
+
 		tab = layui.bodyTab({
 			openTabNum : "50",  //最大可打开窗口数量
 			url : "json/navs.json" //获取菜单json地址
