@@ -14,7 +14,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	     if(username==undefined){
 	     	window.location.href=url.substring(0,url.lastIndexOf("/"));
 		 }
-
+        $(".topLevelMenus").append('<li class="layui-nav-item" data-menu="memberCenter" pc><a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a></li>');
 		tab = layui.bodyTab({
 			openTabNum : "50",  //最大可打开窗口数量
 			url : "json/navs.json" //获取菜单json地址
@@ -24,6 +24,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	function getData(json){
 		$.getJSON(tab.tabConfig.url,function(data){
 			if(json == "contentManagement"){
+				//console.log(data.contentManagement);
 				dataStr = data.contentManagement;
 				//重新渲染左侧菜单
 				tab.render();
@@ -145,20 +146,6 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 //打开新窗口
 function addTab(_this){
 	tab.tabAdd(_this);
-}
-
-//捐赠弹窗
-function donation(){
-	layer.tab({
-		area : ['260px', '367px'],
-		tab : [{
-			title : "微信",
-			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='images/wechat.jpg'></div>"
-		},{
-			title : "支付宝",
-			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='images/alipay.jpg'></div>"
-		}]
-	})
 }
 
 //图片管理弹窗

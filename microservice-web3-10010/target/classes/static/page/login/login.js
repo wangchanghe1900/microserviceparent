@@ -23,6 +23,7 @@ layui.use(['form','layer','jquery'],function(){
                         //console.log(res.data("id"));
                         window.location.href =curWwwPath+"index";
                     }else{
+                        console.log(res.msg);
                         layer.msg(res.msg);
                         btn.text("登录").removeAttr("disabled").removeClass("layui-disabled").addClass("layui-btn");
                     }
