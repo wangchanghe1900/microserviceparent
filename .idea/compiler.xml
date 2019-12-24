@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="microserviceeureka8001" />
         <module name="microservice-web3-10010" />
-        <module name="microservice-user-9001" />
         <module name="microservice-zuul-8990" />
         <module name="microservice-oauthservice-8787" />
         <module name="microservicezuul8990" />
