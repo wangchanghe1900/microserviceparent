@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -14,6 +15,7 @@
         <module name="microservice-eureka-8001" />
         <module name="microservicecommonmodule" />
         <module name="microserviceuser9001" />
+        <module name="microservice-user-9001" />
         <module name="microserviceoauthservice8787" />
       </profile>
     </annotationProcessing>

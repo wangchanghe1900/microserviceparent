@@ -25,19 +25,6 @@ layui.use(['form','layer','table','laytpl'],function(){
             {field: 'userStatus', title: '用户状态',  align:'center',templet:function(d){
                 return d.userStatus == "0" ? "正常使用" : "限制使用";
             }},
-            {field: 'userGrade', title: '用户等级', align:'center',templet:function(d){
-                if(d.userGrade == "0"){
-                    return "注册会员";
-                }else if(d.userGrade == "1"){
-                    return "中级会员";
-                }else if(d.userGrade == "2"){
-                    return "高级会员";
-                }else if(d.userGrade == "3"){
-                    return "钻石会员";
-                }else if(d.userGrade == "4"){
-                    return "超级会员";
-                }
-            }},
             {field: 'userEndTime', title: '最后登录时间', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
