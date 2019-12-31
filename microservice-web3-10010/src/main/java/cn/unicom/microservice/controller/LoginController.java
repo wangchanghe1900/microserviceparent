@@ -1,6 +1,5 @@
 package cn.unicom.microservice.controller;
 
-import cn.unicom.microservice.entity.SysUser;
 import cn.unicom.microservice.web.Response;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
@@ -10,7 +9,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.ImageIO;
@@ -20,9 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author 王长河
@@ -80,7 +79,6 @@ public class LoginController {
             HttpEntity<MultiValueMap<String, String>> requestEntity  = new HttpEntity<MultiValueMap<String, String>>(postParameters, headers);
             Response response = restTemplate.postForObject("http://127.0.0.1:9001/v1/getUserByName",requestEntity,Response.class);
             if(response!=null){
-                //System.out.println("response.getData() = " + response.getData());
                 return response;
             }
             return new Response(500,"用户不存在！");

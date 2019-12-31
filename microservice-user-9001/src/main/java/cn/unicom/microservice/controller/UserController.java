@@ -3,7 +3,6 @@ package cn.unicom.microservice.controller;
 import cn.unicom.microservice.entity.SysUser;
 import cn.unicom.microservice.service.ISysUserService;
 import cn.unicom.microservice.web.Response;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +50,16 @@ public class UserController {
                 return new Response(500,"用户不存在！",null);
             }
         } catch (Exception e) {
+            log.error("login:"+e.getMessage());
+            return new Response(500,"系统错误！",null);
+        }
+    }
+
+    @GetMapping("/getUserList")
+    public Response getUserList(int page,int limit){
+        try {
+            return new Response();
+        }catch(Exception e){
             log.error("login:"+e.getMessage());
             return new Response(500,"系统错误！",null);
         }

@@ -8,22 +8,23 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
-        url : 'json/userList.json',
+        url :'getUserList',
         cellMinWidth : 95,
         page : true,
-        height : "full-125",
+        height : "full-100",
         limits : [10,15,20,25],
         limit : 20,
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
             {field: 'userName', title: '用户名', minWidth:100, align:"center"},
+            {field: 'realName', title: '真实姓名', minWidth:100, align:"center"},
             {field: 'userEmail', title: '用户邮箱', minWidth:200, align:'center',templet:function(d){
                 return '<a class="layui-blue" href="mailto:'+d.userEmail+'">'+d.userEmail+'</a>';
             }},
-            {field: 'userSex', title: '用户性别', align:'center'},
+            {field: 'deptName', title: '所属部门', align:'center'},
             {field: 'userStatus', title: '用户状态',  align:'center',templet:function(d){
-                return d.userStatus == "0" ? "正常使用" : "限制使用";
+                return d.userStatus == "0" ? "正常使用" : "禁止使用";
             }},
             {field: 'userEndTime', title: '最后登录时间', align:'center',minWidth:150},
             {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
