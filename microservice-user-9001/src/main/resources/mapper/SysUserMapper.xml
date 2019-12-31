@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.unicom.microservice.mapper.SysUserMapper">
+    <resultMap id="BaseResultMap" type="cn.unicom.microservice.vo.UserVo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="realname" property="realname" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="lastlogintime" property="lastlogintime" jdbcType="VARCHAR" />
+        <result column="dept_id" property="deptId" jdbcType="BIGINT" />
+        <association property="sysDept" javaType="cn.unicom.microservice.entity.SysDept" >
+            <id  column="dept_id" property="id"/>
+            <result column="deptname" property="deptname" />
+        </association>
+    </resultMap>
+  <select id="getSysUserByPage" resultMap="BaseResultMap">
+      select a.*,b.id dept_id ,b.deptname from sys_user a inner join sys_dept b on a.dept_id=b.id  ${ew.customSqlSegment}
+  </select>
 
+    <select id="getUserInfoByPage" resultType="cn.unicom.microservice.vo.UserInfo">
+      select a.*,b.id dept_id ,b.deptname from sys_user a inner join sys_dept b on a.dept_id=b.id  ${ew.customSqlSegment}
+  </select>
 </mapper>

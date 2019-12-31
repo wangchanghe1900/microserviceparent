@@ -51,9 +51,9 @@ public class SysUser implements Serializable {
     private Integer status;
 
     /**
-     * 部门ID
+     * 部门名称
      */
-    private Long deptId;
+    private Long deptName;
     /**
      * 最后登录时间
      */

@@ -2,8 +2,9 @@ package cn.unicom.microservice.controller;
 
 import cn.unicom.microservice.entity.SysUser;
 import cn.unicom.microservice.service.ISysUserService;
+import cn.unicom.microservice.vo.UserInfo;
 import cn.unicom.microservice.web.Response;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private ISysUserService sysUserService;
+
     @PostMapping("/getUserByName")
     public Response login(String userName,String password) {
         try {
@@ -51,6 +53,19 @@ public class UserController {
                 return new Response(500,"用户不存在！",null);
             }
         } catch (Exception e) {
+            log.error("login:"+e.getMessage());
+            return new Response(500,"系统错误！",null);
+        }
+    }
+
+    @PostMapping("/getUserList")
+    public Response getUserList(int page, int limit, UserInfo userInfo){
+        try {
+
+            IPage<UserInfo> userInfoByPage = sysUserService.getUserInfoByPage(page, limit, userInfo);
+
+            return new Response();
+        }catch(Exception e){
             log.error("login:"+e.getMessage());
             return new Response(500,"系统错误！",null);
         }

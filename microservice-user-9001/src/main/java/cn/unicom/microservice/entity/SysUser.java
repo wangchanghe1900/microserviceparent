@@ -1,12 +1,11 @@
 package cn.unicom.microservice.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -20,7 +19,10 @@ import java.io.Serializable;
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * 主键ID
+     */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
     /**
      * 登录用户名
@@ -55,6 +57,11 @@ public class SysUser implements Serializable {
      * 状态  0：禁用   1：正常
      */
     private Integer status;
+    /**
+     * 部门名称
+     */
+/*    @TableField(exist = false)
+    private String deptName;*/
 
     /**
      * 部门ID
