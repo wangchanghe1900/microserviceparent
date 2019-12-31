@@ -1,13 +1,16 @@
 package cn.unicom.mybatisplus;
 
-import cn.unicom.microservice.entity.SysUser;
 import cn.unicom.microservice.main.UserApplication;
 import cn.unicom.microservice.service.ISysUserService;
+import cn.unicom.microservice.vo.UserVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @author 王长河
@@ -43,9 +46,18 @@ public class MybatisPlusTest {
     }*/
     @Test
     public void usertest(){
-        //*ysUser user = sysUserService.getOne(Wrappers.<SysUser>lambdaQuery()
-               // .eq(SysUser::getUsername,"admin"));*//*
-        SysUser byId = sysUserService.getById(1L);
-        System.out.println("byId = " + byId);
+/*        SysUser user = sysUserService.getOne(Wrappers.<SysUser>lambdaQuery()
+               .eq(SysUser::getUsername,"admin"));
+        System.out.println("user = " + user);*/
+        UserVo userVo=new UserVo();
+
+        IPage<UserVo> sysUserByPage = sysUserService.getSysUserByPage(1, 20, userVo);
+        List<UserVo> records = sysUserByPage.getRecords();
+        records.forEach(System.out::println);
+/*        for(UserVo user:records){
+            System.out.println(user.getSysDept().getDeptname()+"-----"+user.getRealname());
+        }*/
+
+
     }
 }
