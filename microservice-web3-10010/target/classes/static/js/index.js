@@ -9,11 +9,11 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 		element = layui.element;
 		$ = layui.$;
     	layer = parent.layer === undefined ? layui.layer : top.layer;
-	     let url=window.document.location.href;
+/*	     let url=window.document.location.href;
 	     let username=window.sessionStorage.getItem("username");
 	     if(username==undefined){
 	     	window.location.href=url.substring(0,url.lastIndexOf("/"));
-		 }
+		 }*/
         $(".topLevelMenus").append('<li class="layui-nav-item" data-menu="memberCenter" pc><a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a></li>');
 		tab = layui.bodyTab({
 			openTabNum : "50",  //最大可打开窗口数量

@@ -16,10 +16,11 @@
         </association>
     </resultMap>
   <select id="getSysUserByPage" resultMap="BaseResultMap">
-      select a.*,b.id dept_id ,b.deptname from sys_user a inner join sys_dept b on a.dept_id=b.id  ${ew.customSqlSegment}
+      select a.id,a.username,a.realname,a.email,a.mobile,a.status,a.lastlogintime,b.id dept_id ,b.deptname from sys_user a inner join sys_dept b on a.dept_id=b.id  ${ew.customSqlSegment}
   </select>
 
     <select id="getUserInfoByPage" resultType="cn.unicom.microservice.vo.UserInfo">
-      select a.*,b.id dept_id ,b.deptname from sys_user a inner join sys_dept b on a.dept_id=b.id  ${ew.customSqlSegment}
+      select a.id,a.username,a.realname,a.email,a.mobile,a.status,a.lastlogintime,b.id dept_id ,b.deptname from sys_user a inner join sys_dept b on a.dept_id=b.id  ${ew.customSqlSegment}
   </select>
+
 </mapper>

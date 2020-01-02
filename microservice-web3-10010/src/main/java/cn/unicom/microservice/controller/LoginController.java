@@ -9,10 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.ImageIO;
@@ -42,7 +39,12 @@ public class LoginController {
     }
 
     @GetMapping("/index")
-    public String main(){
+    public String main(String userName,String nowTime){
+        //System.out.println("userName = " + userName + ", nowTime = " + nowTime);
+        if(userName==null || nowTime==null){
+            return "redirect:/";
+        }
+
         return "index";
     }
 
@@ -89,8 +91,5 @@ public class LoginController {
     public String main1(){
         return "main";
    }
-   @GetMapping("/test")
-    public String test(){
-        return "test";
-   }
+
 }
