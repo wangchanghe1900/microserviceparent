@@ -243,6 +243,7 @@
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro-version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <modules>

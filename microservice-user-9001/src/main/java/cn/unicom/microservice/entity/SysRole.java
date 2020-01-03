@@ -1,6 +1,7 @@
 package cn.unicom.microservice.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,6 +9,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -41,6 +43,11 @@ public class SysRole implements Serializable {
      * 创建时间
      */
     private LocalDateTime createtime;
+    /**
+     * 角色权限
+     */
+    @TableField(exist = false)
+    private List<SysMenu> permissions;
 
 
 }

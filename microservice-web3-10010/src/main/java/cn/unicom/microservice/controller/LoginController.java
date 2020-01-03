@@ -1,14 +1,13 @@
 package cn.unicom.microservice.controller;
 
+import cn.unicom.microservice.utils.ShiroUtils;
 import cn.unicom.microservice.web.Response;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -59,8 +58,8 @@ public class LoginController {
         BufferedImage image = producer.createImage(text);
         //保存到shiro session
         HttpSession session = request.getSession();
-        session.setAttribute(Constants.KAPTCHA_SESSION_KEY, text);
-        //ShiroUtils.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY, text);
+        //session.setAttribute(Constants.KAPTCHA_SESSION_KEY, text);
+        ShiroUtils.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY, text);
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(image, "jpg", out);
     }
@@ -68,9 +67,10 @@ public class LoginController {
     @PostMapping("/login")
     @ResponseBody
     public Response login(HttpServletRequest request, String userName, String password, String code){
-        HttpSession session = request.getSession();
-        String sessioncode = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
-        if(!sessioncode.equals(code)){
+/*        HttpSession session = request.getSession();
+        String sessioncode = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);*/
+
+ /*      if(!sessioncode.equals(code)){
             return new Response(500,"验证码错误！");
         }else{
             HttpHeaders headers = new HttpHeaders();
@@ -82,14 +82,47 @@ public class LoginController {
             Response response = restTemplate.postForObject("http://127.0.0.1:9001/v1/getUserByName",requestEntity,Response.class);
             if(response!=null){
                 return response;
+            }*/
+            try{
+                String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
+                if(!code.equalsIgnoreCase(kaptcha)){
+                    return new Response(500,"验证码错误！");
+                }
+                Subject subject = ShiroUtils.getSubject();
+                UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+                subject.login(token);
+            }catch (UnknownAccountException e) {
+                return new Response(500,e.getMessage());
+            }catch (IncorrectCredentialsException e) {
+                return new Response(500,"账号或密码不正确！");
+            }catch (LockedAccountException e) {
+                return new Response(500,"账号已被锁定,请联系管理员");
+            }catch (AuthenticationException e) {
+                return new Response(500,"账户验证失败");
+            }catch(Exception e){
+                return new Response(500,e.getMessage());
             }
-            return new Response(500,"用户不存在！");
-        }
+            return new Response(200,"验证通过",userName);
+
 
     }
    @GetMapping("/main")
     public String main1(){
         return "main";
    }
+
+    @RequestMapping("/403")
+    public String unauthorizedRole(){
+        return "403";
+    }
+
+    /**
+     * 退出
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout() {
+        ShiroUtils.logout();
+        return "redirect:/";
+    }
 
 }

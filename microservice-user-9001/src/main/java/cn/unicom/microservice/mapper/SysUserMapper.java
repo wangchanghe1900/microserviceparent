@@ -35,6 +35,11 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      */
     public IPage<UserInfo> getUserInfoByPage(Page<UserInfo> page, @Param(Constants.WRAPPER) Wrapper<UserInfo> wrapper);
 
-
+    /**
+     * 根据条件查询用户信息
+     * @param wrapper
+     * @return
+     */
+    public UserVo getUserInfoByCondition(@Param(Constants.WRAPPER) Wrapper<UserVo> wrapper);
 
 }

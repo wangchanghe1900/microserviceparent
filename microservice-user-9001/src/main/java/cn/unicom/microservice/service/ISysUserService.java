@@ -33,4 +33,11 @@ public interface ISysUserService extends IService<SysUser> {
      */
     public IPage<UserInfo> getUserInfoByPage(int page, int limit, UserInfo userInfo);
 
+    /**
+     * 根据用户条件信息查询用户信息
+     * @param userVo
+     * @return
+     */
+    public UserVo getUserVoByCondition(UserVo userVo);
+
 }

@@ -3,6 +3,7 @@ package cn.unicom.microservice.controller;
 import cn.unicom.microservice.entity.SysUser;
 import cn.unicom.microservice.service.ISysUserService;
 import cn.unicom.microservice.vo.UserInfo;
+import cn.unicom.microservice.vo.UserVo;
 import cn.unicom.microservice.web.Response;
 import cn.unicom.microservice.web.WebResponse;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -35,10 +36,10 @@ public class UserController {
                     user.setSalt(null);
                     return new Response(200,"",user);
                 }else{
-                    return new Response(500,"用户名或密码不正确！",null);
+                    return new Response(300,"用户名或密码不正确！",null);
                 }
             }else{
-                return new Response(500,"用户不存在！",null);
+                return new Response(300,"用户不存在！",null);
             }
         } catch (Exception e) {
             log.error("login:"+e.getMessage());
@@ -55,7 +56,7 @@ public class UserController {
                 user.setSalt(null);
                 return new Response(200,"",user);
             }else{
-                return new Response(500,"用户不存在！",null);
+                return new Response(300,"用户不存在！",null);
             }
         } catch (Exception e) {
             log.error("login:"+e.getMessage());
@@ -74,11 +75,32 @@ public class UserController {
                 Long count=userInfoByPage.getTotal();
                 webResponse.setCount(count.intValue());
                 webResponse.setData(userInfoByPage.getRecords());
+                return webResponse;
+            }else{
+                webResponse.setCode(300);
+                webResponse.setMsg("用户不存在！");
+                return webResponse;
             }
-            return webResponse;
         }catch(Exception e){
             log.error("login:"+e.getMessage());
             return new WebResponse(500,"系统错误！",0);
+        }
+    }
+
+    @PostMapping("/getUserInfoByName/{userName}")
+    public Response getUserInfoByName(@PathVariable("userName") String userName){
+        try {
+            UserVo userVo=new UserVo();
+            userVo.setUsername(userName);
+            UserVo userVoInfo = sysUserService.getUserVoByCondition(userVo);
+            if(userVoInfo ==null){
+              return new Response(300,"用户不存在");
+            }else{
+                return new Response(200,"",userVoInfo);
+            }
+        }catch(Exception e){
+            log.error("login:"+e.getMessage());
+            return new Response(500,"系统错误！");
         }
     }
 }

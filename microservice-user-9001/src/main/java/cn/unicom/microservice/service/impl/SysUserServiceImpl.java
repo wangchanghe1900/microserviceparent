@@ -52,4 +52,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         queryWrapper.orderByDesc("a.id");
         return sysUserMapper.getUserInfoByPage(ipage,queryWrapper);
     }
+
+    @Override
+    public UserVo getUserVoByCondition(UserVo userVo) {
+        QueryWrapper<UserVo> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq(StringUtils.isNotEmpty(userVo.getUsername()),"username",userVo.getUsername())
+                .likeRight(StringUtils.isNotEmpty(userVo.getRealname()),"realname",userVo.getRealname())
+                 .eq(StringUtils.isNotEmpty(userVo.getMobile()),"mobile",userVo.getMobile());
+        return sysUserMapper.getUserInfoByCondition(queryWrapper);
+    }
 }

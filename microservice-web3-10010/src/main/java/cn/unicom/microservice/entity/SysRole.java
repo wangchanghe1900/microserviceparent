@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -38,6 +39,11 @@ public class SysRole implements Serializable {
      * 创建时间
      */
     private LocalDateTime createtime;
+
+    /**
+     * 角色权限
+     */
+    private List<SysMenu> permissions;
 
 
 }

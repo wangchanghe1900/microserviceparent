@@ -2,7 +2,6 @@ package cn.unicom.microservice.controller;
 
 import cn.unicom.microservice.entity.UserInfo;
 import cn.unicom.microservice.web.WebResponse;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
@@ -20,9 +19,6 @@ import org.springframework.web.client.RestTemplate;
 public class UserController {
     @Autowired
     private RestTemplate restTemplate;
-
-    @Autowired
-    private Gson gson;
 
     @GetMapping("/userList")
     public String userList()throws Exception{
