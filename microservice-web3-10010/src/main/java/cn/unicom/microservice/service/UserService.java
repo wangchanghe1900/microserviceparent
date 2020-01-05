@@ -2,6 +2,9 @@ package cn.unicom.microservice.service;
 
 import cn.unicom.microservice.entity.UserInfo;
 import cn.unicom.microservice.web.Response;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.TypeReference;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -25,10 +28,13 @@ public class UserService {
     public UserInfo getUserInfoByName(String name){
         MultiValueMap<String,Object> postParameters=new LinkedMultiValueMap<>();
         HttpEntity<MultiValueMap<String, Object>> requestEntity=new HttpEntity<>(postParameters);
-        Response userResponse = restTemplate.postForObject("http://127.0.0.1:9001/v1/getUserList/"+name, requestEntity, Response.class);
+        Response userResponse = restTemplate.postForObject("http://127.0.0.1:9001/v1/getUserInfoByName/"+name, requestEntity, Response.class);
+        System.out.println("userResponse = " + userResponse);
         if(userResponse!=null){
             if(userResponse.getCode()==200){
-                UserInfo userInfo = gson.fromJson(userResponse.getData().toString(), UserInfo.class);
+                Object data = userResponse.getData();
+                String s = JSONArray.toJSONString(data);
+                UserInfo userInfo = JSON.parseObject(s,new TypeReference<UserInfo>() {});//gson.fromJson(jsonstr, UserInfo.class);
                 return userInfo;
             }
         }

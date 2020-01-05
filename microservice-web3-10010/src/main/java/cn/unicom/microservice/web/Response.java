@@ -88,4 +88,15 @@ public class Response implements Serializable {
     public Object getData() {
         return data;
     }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                ", token='" + token + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package cn.unicom.microservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
  * @since 2019-12-14
  */
 @Data
+@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;

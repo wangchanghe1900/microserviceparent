@@ -66,7 +66,7 @@ public class LoginController {
 
     @PostMapping("/login")
     @ResponseBody
-    public Response login(HttpServletRequest request, String userName, String password, String code){
+    public Response login(HttpServletRequest request, String username, String password, String code){
 /*        HttpSession session = request.getSession();
         String sessioncode = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);*/
 
@@ -89,8 +89,9 @@ public class LoginController {
                     return new Response(500,"验证码错误！");
                 }
                 Subject subject = ShiroUtils.getSubject();
-                UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+                UsernamePasswordToken token = new UsernamePasswordToken(username, password);
                 subject.login(token);
+                //subject.login(null);
             }catch (UnknownAccountException e) {
                 return new Response(500,e.getMessage());
             }catch (IncorrectCredentialsException e) {
@@ -102,7 +103,7 @@ public class LoginController {
             }catch(Exception e){
                 return new Response(500,e.getMessage());
             }
-            return new Response(200,"验证通过",userName);
+            return new Response(200,"验证通过",username);
 
 
     }

@@ -19,18 +19,19 @@ layui.use(['form','layer','jquery'],function(){
                 data:userInfo,
                 success:function(res){
                     if(res.code==200){
-                        window.sessionStorage.setItem("username",data.field.userName);
+                        window.sessionStorage.setItem("username",data.field.username);
                         //console.log(res.data("id"));
-                        let redirectUrl=curWwwPath+"index?userName="+data.field.userName+"&nowTime="+$.now();
+                        let redirectUrl=curWwwPath+"index?userName="+data.field.username+"&nowTime="+$.now();
                         window.location.href =redirectUrl;//curWwwPath+"index?userName="+data.field.userName+"&nowTime="+$.now();
                     }else{
-                        console.log(res.msg);
+                        console.log(res);
                         layer.msg(res.msg);
                         btn.text("登录").removeAttr("disabled").removeClass("layui-disabled").addClass("layui-btn");
                     }
                 },
                 error:function (err) {
-                    window.location.href =curWwwPath+"/error";
+                    //alert(err);
+                    window.location.href =curWwwPath;
                 }
             });
         },1000);

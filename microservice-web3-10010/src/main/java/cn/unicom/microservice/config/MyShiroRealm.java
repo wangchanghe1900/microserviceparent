@@ -65,10 +65,10 @@ public class MyShiroRealm extends AuthorizingRealm {
         //UserInfo userInfo=new UserInfo();
         //userInfo.setUsername(usertoken.getUsername());
         //String username = (String)token.getPrincipal();
-        System.out.println(token.getCredentials());
+        //System.out.println(token.getCredentials().toString());
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-        UserInfo userInfo = userService.getUserInfoByName(username);//userInfoService.findByUsername(username);
+        UserInfo userInfo =userService.getUserInfoByName(username);//userInfoService.findByUsername(username);
         System.out.println("----->>userInfo="+userInfo);
         if(userInfo == null){
             throw new UnknownAccountException("账号或密码不正确");

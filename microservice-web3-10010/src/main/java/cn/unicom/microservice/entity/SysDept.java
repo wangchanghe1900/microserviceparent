@@ -33,7 +33,7 @@ public class SysDept implements Serializable {
     /**
      * 部门名称
      */
-    private String name;
+    private String deptname;
 
     /**
      * 部门描述

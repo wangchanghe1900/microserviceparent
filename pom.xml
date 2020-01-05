@@ -45,6 +45,7 @@
         <pio-version>4.0.1</pio-version>
         <kaptcha.version>0.0.9</kaptcha.version>
         <shiro-version>1.4.2</shiro-version>
+        <fastjson-version>1.2.56</fastjson-version>
     </properties>
 
     <dependencyManagement>
@@ -155,7 +156,11 @@
                 <artifactId>spring-boot-starter-amqp</artifactId>
                 <version>${springboot-version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-json</artifactId>
+                <version>${springboot-version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -243,7 +248,11 @@
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro-version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson-version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <modules>

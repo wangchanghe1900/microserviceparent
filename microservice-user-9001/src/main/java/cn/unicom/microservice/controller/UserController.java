@@ -8,6 +8,9 @@ import cn.unicom.microservice.web.Response;
 import cn.unicom.microservice.web.WebResponse;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private ISysUserService sysUserService;
+
 
     @PostMapping("/getUserByName")
     public Response getUserByName(String userName,String password) {
@@ -103,4 +107,5 @@ public class UserController {
             return new Response(500,"系统错误！");
         }
     }
+
 }
