@@ -14,16 +14,41 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	     if(username==undefined){
 	     	window.location.href=url.substring(0,url.lastIndexOf("/"));
 		 }*/
-        $(".topLevelMenus").append('<li class="layui-nav-item" data-menu="memberCenter" pc><a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a></li>');
+	    let username=window.sessionStorage.getItem("username");
+	    $.ajaxSettings.async = false;
+	    $.post("getURLByName/"+username,function(data,status){
+	    	if(status=='success'){
+				var menus=data;
+	    		for(var i=0;i<menus.length;i++){
+					var menu='<li class="layui-nav-item" data-menu="'+menus[i].name+'" pc><a href="javascript:;"><i class="seraph '+menus[i].icon+'" data-icon="'+menus[i].icon+'"></i><cite>'+menus[i].name+'</cite></a></li>';
+					//console.log(menu);
+					$(".topLevelMenus").append(menu);
+				}
+			}
+
+		});
+	    $.ajaxSettings.async = true;
 		tab = layui.bodyTab({
 			openTabNum : "50",  //最大可打开窗口数量
-			url : "json/navs.json" //获取菜单json地址
+			url : "getAllNavsMenu"//"json/navs.json" //获取菜单json地址
 		});
 
 	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
 	function getData(json){
 		$.getJSON(tab.tabConfig.url,function(data){
-			if(json == "contentManagement"){
+			var menus=data;
+			for(var i=0;i<menus.length;i++){
+				//console.log(menus[i].parentName);
+				if(json == menus[i].parentName){
+					if(menus[i].navsList!=null){
+						console.log(menus[i].navsList);
+						dataStr = menus[i].navsList;
+						//重新渲染左侧菜单
+						tab.render();
+					}
+				}
+			}
+/*			if(json == "contentManagement"){
 				//console.log(data.contentManagement);
 				dataStr = data.contentManagement;
 				//重新渲染左侧菜单
@@ -40,7 +65,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
                 dataStr = data.seraphApi;
                 //重新渲染左侧菜单
                 tab.render();
-            }
+            }*/
 		})
 	}
 	//页面加载时判断左侧菜单是否显示
@@ -53,6 +78,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 		}
 		$(".layui-layout-admin").removeClass("showMenu");
 		$("body").addClass("site-mobile");
+		//console.log($(this).data("menu"));
 		getData($(this).data("menu"));
 		//渲染顶部窗口
 		tab.tabMove();
@@ -70,7 +96,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	})
 
 	//通过顶部菜单获取左侧二三级菜单   注：此处只做演示之用，实际开发中通过接口传参的方式获取导航数据
-	getData("contentManagement");
+	//getData("contentManagement");
 
 	//手机设备的简单适配
     $('.site-tree-mobile').on('click', function(){

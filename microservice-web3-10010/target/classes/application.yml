@@ -13,4 +13,4 @@ spring:
     charset: UTF-8
 microservice:
   user:
-    url: http://microservice-gateway/api/user/
+    url: http://127.0.0.1:9001/v1/  #http://microservice-gateway/api/user/

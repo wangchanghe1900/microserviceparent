@@ -25,7 +25,6 @@ import java.io.IOException;
  */
 @Controller
 public class LoginController {
-
     @Autowired
     private Producer producer;
 

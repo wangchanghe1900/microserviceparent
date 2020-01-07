@@ -1,6 +1,8 @@
 package cn.unicom.microservice.config;
 
 
+import cn.unicom.microservice.entity.SysMenu;
+import cn.unicom.microservice.entity.SysRole;
 import cn.unicom.microservice.entity.UserInfo;
 import cn.unicom.microservice.service.SysMenuService;
 import cn.unicom.microservice.service.UserService;
@@ -13,7 +15,10 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class MyShiroRealm extends AuthorizingRealm {
     @Autowired
@@ -26,6 +31,9 @@ public class MyShiroRealm extends AuthorizingRealm {
         UserInfo userInfo  = (UserInfo)principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         List<String> permsList;
+        if(userInfo==null){
+            return null;
+        }
         //系统管理员，拥有最高权限
         if("admin".equals(userInfo.getUsername())){
             List<String> menuList = sysMenuService.getAllSysMenuList();
@@ -33,24 +41,34 @@ public class MyShiroRealm extends AuthorizingRealm {
             for(String menu : menuList){
                 permsList.add(menu);
             }
-        }else{
-            permsList = sysMenuService.getSysMenuList(userInfo.getId());
+            Set<String> permsSet = new HashSet<>();
+            for(String perms : permsList){
+                if(StringUtils.isEmpty(perms)){
+                    continue;
+                }
+                permsSet.add(perms);
+            }
+            authorizationInfo.setStringPermissions(permsSet);
+        }else {
+            if (userInfo.getRoles() != null) {
+                for (SysRole role : userInfo.getRoles()) {
+                    authorizationInfo.addRole(role.getName());
+                    for (SysMenu p : role.getPermissions()) {
+                        authorizationInfo.addStringPermission(p.getPerms());
+                    }
+                }
+                //permsList = sysMenuService.getSysMenuList(userInfo.getId());
+            }
         }
         //用户权限列表
-        Set<String> permsSet = new HashSet<>();
-        for(String perms : permsList){
-            if(StringUtils.isEmpty(perms)){
-                continue;
-            }
-            permsSet.add(perms);
-        }
+
 /*        for(SysRole role:userInfo.getRoles()){
             authorizationInfo.addRole(role.getName());
             for(SysMenu p:role.getPermissions()){
                 authorizationInfo.addStringPermission(p.getPerms());
             }
         }*/
-        authorizationInfo.setStringPermissions(permsSet);
+
         return authorizationInfo;
     }
 
@@ -58,7 +76,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
             throws AuthenticationException {
-        System.out.println("MyShiroRealm.doGetAuthenticationInfo()");
+        //System.out.println("MyShiroRealm.doGetAuthenticationInfo()");
         //获取用户的输入的账号.
         UsernamePasswordToken usertoken = (UsernamePasswordToken)token;
         String username=usertoken.getUsername();
@@ -69,7 +87,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
         UserInfo userInfo =userService.getUserInfoByName(username);//userInfoService.findByUsername(username);
-        System.out.println("----->>userInfo="+userInfo);
+        //System.out.println("----->>userInfo="+userInfo);
         if(userInfo == null){
             throw new UnknownAccountException("账号或密码不正确");
         }

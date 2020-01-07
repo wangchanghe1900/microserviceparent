@@ -1,14 +1,19 @@
 package cn.unicom.mybatisplus;
 
+import cn.unicom.microservice.entity.SysMenu;
 import cn.unicom.microservice.main.UserApplication;
 import cn.unicom.microservice.mapper.SysUserMapper;
+import cn.unicom.microservice.service.ISysMenuService;
 import cn.unicom.microservice.service.ISysUserService;
-import cn.unicom.microservice.vo.UserVo;
+import cn.unicom.microservice.vo.UserInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @author 王长河
@@ -22,6 +27,9 @@ public class MybatisPlusTest {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private ISysMenuService sysMenuService;
 
 /*    @Resource
     private DataSource dataSource;*/
@@ -68,10 +76,14 @@ public class MybatisPlusTest {
         //IPage<UserInfo> sysUserByPage = sysUserService.page()
         //List<UserInfo> records = sysUserByPage.getRecords();
         //records.forEach(System.out::println);
-        UserVo userVo=new UserVo();
-        userVo.setUsername("wangch15");
-        UserVo userVo1 = sysUserService.getUserVoByCondition(userVo);
-        System.out.println("userVo = " + userVo1);
-
+        UserInfo userInfo=new UserInfo();
+        IPage<UserInfo> userInfoByPage = sysUserService.getUserInfoByPage(1, 20, userInfo);
+        List<UserInfo> records = userInfoByPage.getRecords();
+        records.forEach(System.out::println);
+    }
+    @Test
+    public void sysmenutest(){
+        List<SysMenu> menus = sysMenuService.getTopSysMenuByName("wangch15");
+        menus.forEach(System.out::println);
     }
 }
