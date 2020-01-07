@@ -27,7 +27,7 @@
 
 				<!-- 顶级菜单 -->
 				<ul class="layui-nav mobileTopLevelMenus" mobile>
-					<li class="layui-nav-item" data-menu="contentManagement">
+<!--					<li class="layui-nav-item" data-menu="contentManagement">
 						<a href="javascript:;" class="seraph icon-caidan" ><cite>菜单</cite></a>
 						<dl class="layui-nav-child">
 							<dd data-menu="contentManagement"><a href="javascript:;"><i class="seraph icon-vip" data-icon="icon-vip"></i><cite>内容管理</cite></a></dd>
@@ -35,7 +35,7 @@
 							<dd data-menu="systemeSttings"><a href="javascript:;"><i class="seraph icon-liulanqi" data-icon="icon-liulanqi"></i><cite>系统设置</cite></a></dd>
 							<dd data-menu="seraphApi"><a href="javascript:;"><i class="seraph icon-ziliao" data-icon="icon-ziliao"></i><cite>使用文档</cite></a></dd>
 						</dl>
-					</li>
+					</li>-->
 				</ul>
 				<ul class="layui-nav topLevelMenus" pc>
 					<!--					<li class="layui-nav-item " data-menu="contentManagement" pc>
@@ -62,14 +62,14 @@
 						<a href="javascript:;" class="showNotice"><i class="seraph icon-remind_fill" data-icon="icon-remind_fill"></i><cite>系统公告</cite><span class="layui-badge-dot"></span></a>
 					</li>
 					<li class="layui-nav-item" id="userInfo">
-						<a href="javascript:;"><img src="images/xm.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">王长河</cite></a>
+						<!--<a href="javascript:;"><img src="images/xm.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">王长河</cite></a>-->
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="seraph icon-ziliao" data-icon="icon-ziliao"></i><cite>个人资料</cite></a></dd>
 							<dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="seraph icon-xiugai" data-icon="icon-xiugai"></i><cite>修改密码</cite></a></dd>
 <!--							<dd><a href="javascript:;" class="showNotice"><i class="seraph icon-test" data-icon="icon-test"></i><cite>系统公告</cite><span class="layui-badge-dot"></span></a></dd>-->
 							<dd pc><a href="javascript:;" class="functionSetting"><i class="seraph icon-look" data-icon="icon-look"></i><cite>功能设定</cite><span class="layui-badge-dot"></span></a></dd>
 							<dd pc><a href="javascript:;" class="changeSkin"><i class="seraph icon-prohibit" data-icon="icon-prohibit"></i><cite>更换皮肤</cite></a></dd>
-							<dd><a href="${request.contextPath}/" class="signOut"><i class="seraph icon-tuichu"></i><cite>退出</cite></a></dd>
+							<dd><a href="${request.contextPath}/logout" class="signOut"><i class="seraph icon-tuichu"></i><cite>退出</cite></a></dd>
 						</dl>
 					</li>
 				</ul>
