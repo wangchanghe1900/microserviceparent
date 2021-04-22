@@ -43,7 +43,7 @@
         <securityrsa-version>1.0.8.RELEASE</securityrsa-version>
         <pio-version>4.0.1</pio-version>
         <kaptcha.version>0.0.9</kaptcha.version>
-        <shiro-version>1.4.2</shiro-version>
+        <shiro-version>1.7.1</shiro-version>
         <fastjson-version>1.2.56</fastjson-version>
     </properties>
 
