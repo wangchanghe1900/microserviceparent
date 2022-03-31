@@ -20,7 +20,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <springcloud-version>Finchley.RELEASE</springcloud-version>
         <lombok.version>1.18.4</lombok.version>
-        <springboot-version>2.0.3.RELEASE</springboot-version>
+        <springboot-version>2.5.12</springboot-version>
         <zuul-version>2.1.0.RELEASE</zuul-version>
         <tomcat-version>8.5.34</tomcat-version>
         <gson-verson>2.8.5</gson-verson>
