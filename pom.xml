@@ -25,7 +25,7 @@
         <tomcat-version>8.5.34</tomcat-version>
         <gson-verson>2.8.5</gson-verson>
         <springloaded-version>1.2.6.RELEASE</springloaded-version>
-        <mysql-version>8.0.16</mysql-version>
+        <mysql-version>8.0.28</mysql-version>
         <druid-version>1.1.20</druid-version>
         <helper-version>1.2.3</helper-version>
         <mybatis-version>3.4.6</mybatis-version>
